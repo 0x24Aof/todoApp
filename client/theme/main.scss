@@ -1,0 +1,137 @@
+// import external stylesheet
+@import '../../node_modules/bootstrap/scss/bootstrap';
+$fa-font-path: "~font-awesome/fonts";
+@import "../../node_modules/font-awesome/scss/font-awesome";
+
+@import "variables";
+
+.clearfix {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.reminder {
+    width: 500px;
+    margin: 30px auto;
+    background: $base-color;
+    border: 1px solid $border-color;
+    padding: 20px;
+    box-shadow: 0 3px 0 0 darken($base-color, 30%);
+    border-radius: $border-radius;
+    color: $font-color;
+    &-header {
+        @extend .clearfix;
+        margin-bottom: 15px;
+        border-bottom: 1px solid $border-color;
+
+        &__title {
+            font-size: 1.5rem;
+            float: left;
+        }
+        .btn {
+            float: right;
+            margin-right: 10px;
+        }
+    }
+    .todo-list {
+        padding: 0;
+        margin-bottom: 0;
+        list-style: none;
+
+        &-item {
+            @extend .clearfix;
+            border: 1px solid $border-color;
+            border-top: none;
+            position: relative;
+
+            &:first-child {
+                border-top: 1px solid $border-color;
+            }
+
+            &__title {
+                border-left: 1px solid $border-color;
+                padding: 10px 15px;
+                margin: 0 0 0 0;
+                display: inline-block;
+                width: 320px;
+                word-wrap: break-word;
+                color: $font-color;
+            }
+            &__checkbox {
+                margin: 15px;
+                display: inline;
+                cursor: pointer;
+            }
+            .btn {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+            .btn-outline-warning {
+                right: 50px;
+            }
+
+            .done {
+                text-decoration: line-through;
+                color: $red-color;
+            }
+        }
+    }
+
+    .create-todo {
+        div:last-child {
+            margin-bottom: 0;
+            text-align: right;
+            .btn {
+                cursor: pointer;
+            }
+            .btn-outline-secondary {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .show-todo {
+        .table {
+            tbody {
+                > tr {
+                    td {
+                        word-break: break-word;
+                    }
+                }
+            }
+        }
+    }
+
+    .filter {
+        text-align: right;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+        &-list {
+            list-style: none;
+            padding: 0;
+            display: inline;
+            margin-left: 10px;
+
+            > li {
+                display: inline;
+                > a {
+                    padding: 5px;
+                    text-transform: uppercase;
+                    color: #999;
+                    cursor: pointer;
+
+                    &.active {
+                        color: #0162b4;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
