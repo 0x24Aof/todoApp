@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
     next();
 });
 app.use(bodyParser.json())
-mongoose.connect(`mongodb://${config.host}:27017/dotography`);
+mongoose.connect(`mongodb://${config.host}:27017/todoapp`);
 const Schema = mongoose.Schema
 const Todo = mongoose.model('Todo', new Schema({
     title: String,
@@ -59,6 +59,18 @@ app.post('/api/v1/todos', (req, res) => {
             res.send(500, err)
         }
         res.send({data: todo, message: 'Create success'})
+    })
+})
+
+app.post('/api/v1/todos/toggleAll', (req, res) => {
+    var done = req.query.checked === 'true'
+    Todo.update({}, {done: done}, {multi: true}, (err, todos) => {
+        if(err) {
+            res.send(500, err)
+        }
+        Todo.find({}, (err, todos) => {
+            res.send({data: todos, message: 'Toggle all success'})
+        })
     })
 })
 

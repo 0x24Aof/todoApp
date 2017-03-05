@@ -16,7 +16,8 @@ class ItemTodo extends Component {
     static propTypes = {
         todo: PropTypes.object.isRequired,
         onRemoveTodo: PropTypes.func.isRequired,
-        onUpdateTodo: PropTypes.func.isRequired
+        onUpdateTodo: PropTypes.func.isRequired,
+        onCompleteTodo: PropTypes.func.isRequired
     }
 
 
@@ -28,9 +29,11 @@ class ItemTodo extends Component {
 
     handleToggle(event) {
         this.setState({done: !this.state.done})
-        const { onUpdateTodo, todo } = this.props
+        const { onUpdateTodo, onCompleteTodo, todo } = this.props
         todo.done = event.target.checked
         onUpdateTodo(todo)
+        setTimeout(onCompleteTodo, 50)
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -47,7 +50,10 @@ class ItemTodo extends Component {
             <li className="todo-list-item">
                 <input onChange={this.handleToggle} checked={this.state.done} className="todo-list-item__checkbox" type="checkbox"/>
                 <Link to={{ pathname: `/todos/${todo._id}` }} className={this.state.done? 'done todo-list-item__title': 'todo-list-item__title'}>{ todo.title }</Link>
-                <Link to={{ pathname: `/todos/${todo._id}/edit` }} className="btn btn-outline-warning btn-sm"><i className="fa fa-pencil"></i></Link>
+                {   !this.state.done &&
+                    <Link to={{pathname: `/todos/${todo._id}/edit`}} className="btn btn-outline-warning btn-sm"><i
+                        className="fa fa-pencil"></i></Link>
+                }
                 <button onClick={this.handleRemoveTodo.bind(this, todo._id)} className="btn btn-outline-danger btn-sm"><i className="fa fa-trash-o"></i></button>
             </li>
         )

@@ -6,6 +6,7 @@ import {
     CREATE_TODO_REQUEST, CREATE_TODO_SUCCESS, CREATE_TODO_FAILURE,
     UPDATE_TODO_REQUEST, UPDATE_TODO_SUCCESS, UPDATE_TODO_FAILURE,
     DELETE_TODO_REQUEST, DELETE_TODO_SUCCESS, DELETE_TODO_FAILURE,
+    TOGGLE_ALL_REQUEST, TOGGLE_ALL_SUCCESS, TOGGLE_ALL_FAILURE
 
 } from '../constants/actionTypes'
 import { TODOS_ENDPOINT } from '../constants/endpoint'
@@ -54,33 +55,30 @@ export const createTodo = (todo) => (
         })
 )
 
-export const updateTodo = (todo) => (
-    (dispatch) =>
-        dispatch({
-            [CALL_API]: {
-                endpoint: `${TODOS_ENDPOINT}/${todo.id || todo._id}`,
-                headers : {
-                    'Accept'      : 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body    : JSON.stringify(todo),
-                method  : 'PUT',
-                types   : [
-                    UPDATE_TODO_REQUEST,
-                    {
-                        type   : UPDATE_TODO_SUCCESS,
-                        payload: (_action, _state, res) => {
-                            console.log(_action, _state)
-                            return res.json().then((resTodo) => {
-                                // dispatch(push(`/todos/${resTodo.data._id}`))
-                                return resTodo
-                            })
-                        }
-                    },
-                    UPDATE_TODO_FAILURE]
-            }
-        })
-)
+export const toggleAllTodo = (checked) => ({
+    [CALL_API]: {
+        endpoint: `${TODOS_ENDPOINT}/toggleAll?checked=${checked}`,
+        headers : {
+            'Accept'      : 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method  : 'POST',
+        types   : [TOGGLE_ALL_REQUEST, TOGGLE_ALL_SUCCESS, TOGGLE_ALL_FAILURE]
+    }
+})
+
+export const updateTodo = (todo) => ({
+    [CALL_API]: {
+        endpoint: `${TODOS_ENDPOINT}/${todo.id || todo._id}`,
+        headers : {
+            'Accept'      : 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body    : JSON.stringify(todo),
+        method  : 'PUT',
+        types   : [UPDATE_TODO_REQUEST, UPDATE_TODO_SUCCESS, UPDATE_TODO_FAILURE]
+    }
+})
 
 export const removeTodo = (id) => ({
     [CALL_API]: {

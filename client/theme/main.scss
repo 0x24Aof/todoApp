@@ -108,6 +108,17 @@ $fa-font-path: "~font-awesome/fonts";
         }
     }
 
+    .check-all {
+        float: left;
+        font-size: 0.9rem;
+        padding: 0 16px;
+        text-transform: uppercase;
+        input {
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+    }
+
     .filter {
         text-align: right;
         margin-bottom: 10px;

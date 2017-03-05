@@ -3,7 +3,8 @@ import {
     LOAD_TODO_SUCCESS,
     CREATE_TODO_SUCCESS,
     UPDATE_TODO_SUCCESS,
-    DELETE_TODO_SUCCESS
+    DELETE_TODO_SUCCESS,
+    TOGGLE_ALL_SUCCESS
 } from '../constants/actionTypes'
 
 const initialState = []
@@ -24,6 +25,9 @@ export default (state = initialState, action) => {
 
                 return todo
             })
+        case TOGGLE_ALL_SUCCESS:
+            state = action.payload.data
+            return state
         case DELETE_TODO_SUCCESS:
             return state.filter(todo => todo._id !== action.payload.data)
         default:
