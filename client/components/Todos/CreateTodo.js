@@ -15,6 +15,7 @@ class CreateTodo extends Component {
         this.state = {
             title: '',
             desc: '',
+            done: false,
             titleIsRequired: false
         }
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -47,6 +48,7 @@ class CreateTodo extends Component {
         }
 
         if(!id) {
+            this.setState({ created: Date.now() })
             this.props.onCreateTodo(this.state)
         }else {
             this.props.onUpdateTodo({id: id, ...this.state})
@@ -62,6 +64,7 @@ class CreateTodo extends Component {
                 this.setState({
                     title: res.payload[0].title,
                     desc : res.payload[0].desc,
+                    done : res.payload[0].done
                 })
             })
         }
