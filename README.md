@@ -15,6 +15,6 @@ Run `npm start` to start application
 
 application running on [localhost:3001](localhost:3001)
 
-** Test Pass with environment:
+** Run Pass with environment:
 - node version 6.5.0
 - MongoDB shell version v3.4.0
