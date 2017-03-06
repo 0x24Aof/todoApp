@@ -7,6 +7,8 @@ Install [node](https://nodejs.org/en/)
 
 Install [mongodb](https://docs.mongodb.com/manual/installation/)
 
+---
+
 Run `npm install` to install module and then
 
 Run `npm start` to start application
