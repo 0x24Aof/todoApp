@@ -4,6 +4,7 @@ Todo App [ React + Redux + MongoDB ]
 Prerequisite
 ------------
 Install [node](https://nodejs.org/en/)
+
 Install [mongodb](https://docs.mongodb.com/manual/installation/)
 
 Run `npm install` to install module and then
